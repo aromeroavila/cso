@@ -1,0 +1,28 @@
+ext {
+
+    // Android versions
+    supportVerion = '25.2.0'
+    constraitVersion = '1.0.1'
+
+    // Libraries versions
+    daggerVersion = '2.10'
+    javaxInjectVersion = '1'
+
+    presentationDependencies = [
+            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger:             "com.google.dagger:dagger:${daggerVersion}",
+            appCompat:          "com.android.support:appcompat-v7:${supportVerion}",
+            supportV4:          "com.android.support:support-v4:${supportVerion}",
+            constrainLayout:    "com.android.support.constraint:constraint-layout:${constraitVersion}"
+    ]
+
+    domainDependencies = [
+            javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}"
+    ]
+
+    dataDependencies = [
+            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger:             "com.google.dagger:dagger:${daggerVersion}"
+    ]
+
+}

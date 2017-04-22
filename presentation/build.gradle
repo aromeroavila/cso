@@ -23,9 +23,11 @@ dependencies {
     compile project(':domain')
     compile project(':data')
 
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.1'
-    compile 'com.android.support:support-v4:25.2.0'
+    compile presentationDependencies.appCompat
+    compile presentationDependencies.supportV4
+    compile presentationDependencies.constrainLayout
+    compile presentationDependencies.dagger
+    annotationProcessor presentationDependencies.daggerCompiler
 
     testCompile 'junit:junit:4.12'
 
