@@ -1,0 +1,11 @@
+1/narrator/text for line 1
+2/$/text for line 2
+3/Sexy guy 1/text for line 3 with options/option one text$4/option two text$5/option three text$6
+4/Sexy guy 1/text for line 4 with reference to character name $
+5/narrator/text for line 5
+6/narrator/text for line 6
+7/narrator/text for line 7
+8/narrator/text for line 8
+9/narrator/text for line 9
+10/narrator/text for line 10
+11/narrator/text for line 11

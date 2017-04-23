@@ -1,7 +1,10 @@
 package com.arao.cheapsoapopera.injection.component;
 
+import android.content.Context;
+
 import com.arao.cheapsoapopera.ApplicationModule;
 import com.arao.cheapsoapopera.CsoApplication;
+import com.arao.cheapsoapopera.injection.qualifier.ApplicationContext;
 
 import javax.inject.Singleton;
 
@@ -20,5 +23,8 @@ public interface ApplicationComponent {
 
         ApplicationComponent build();
     }
+
+    @ApplicationContext
+    Context context();
 
 }

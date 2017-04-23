@@ -1,43 +1,57 @@
 package com.arao.cso.data.story;
 
+import android.util.SparseArray;
+
+import com.arao.cso.data.parser.ChapterParser;
 import com.arao.cso.domain.story.StoryDataSource;
 import com.arao.cso.domain.story.StoryLine;
+import com.arao.cso.domain.story.StoryUseCase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 public class StoryRepository implements StoryDataSource {
 
-    private StoryNode currentStoryNode;
+    private SparseArray<StoryNode> storyNodes;
+    private int currentNodeId;
+    private ChapterParser chapterParser;
+    private StoryNodeMapper storyNodeMapper;
 
     @Inject
-    StoryRepository() {
+    public StoryRepository(ChapterParser chapterParser, StoryNodeMapper storyNodeMapper) {
+        this.chapterParser = chapterParser;
+        this.storyNodeMapper = storyNodeMapper;
     }
 
     @Override
     public StoryLine getLastStoryLine() {
-        return storyLineEntityFrom(currentStoryNode);
+        if (storyNodes == null) {
+            storyNodes = chapterParser.parseChapter(1);
+            currentNodeId = 1;
+        }
+        return storyNodeMapper.storyLineFrom(getCurrentStoryNode());
     }
 
     @Override
     public StoryLine updateCurrentStoryLine(int option) {
-        StoryNode newStoryNode = currentStoryNode.getNextStoryNodes().get(option);
-        currentStoryNode = newStoryNode;
-        return storyLineEntityFrom(newStoryNode);
-    }
+        StoryNode currentStoryNode = getCurrentStoryNode();
+        StoryNode newStoryNode;
+        List<NodeOption> nodeOptions = getCurrentStoryNode().getNodeOptions();
 
-    private StoryLine storyLineEntityFrom(StoryNode storyNode) {
-        List<StoryNode> nextStoryNodes = storyNode.getNextStoryNodes();
-        int optionsSize = nextStoryNodes.size();
-        List<String> options = new ArrayList<>(optionsSize);
-
-        for (int i = 0; i < optionsSize; i++) {
-            options.add(i, nextStoryNodes.get(i).getText());
+        if (option == StoryUseCase.DEFAULT_OPTION) {
+            newStoryNode = storyNodes.get(currentStoryNode.getId() + 1);
+        } else {
+            NodeOption selectedNodeOption = nodeOptions.get(option);
+            newStoryNode = storyNodes.get(selectedNodeOption.getNextStoryNode());
         }
 
-        return new StoryLine(storyNode.getText(), null, options);
-
+        currentNodeId = newStoryNode.getId();
+        return storyNodeMapper.storyLineFrom(newStoryNode);
     }
+
+    private StoryNode getCurrentStoryNode() {
+        return storyNodes.get(currentNodeId);
+    }
+
 }

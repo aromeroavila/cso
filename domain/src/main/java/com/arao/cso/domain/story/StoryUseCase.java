@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 public class StoryUseCase {
 
-    private static final int DEFAULT_OPTION = 0;
+    public static final int DEFAULT_OPTION = -1;
 
     private StoryDataSource storyDataSource;
 

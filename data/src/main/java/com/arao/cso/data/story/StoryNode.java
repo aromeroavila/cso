@@ -2,27 +2,34 @@ package com.arao.cso.data.story;
 
 import java.util.List;
 
-class StoryNode {
+public class StoryNode {
 
-    private long id;
+    private int id;
+    private String character;
     private String text;
-    private List<StoryNode> nextStoryNodes;
+    private List<NodeOption> nodeOptions;
 
-    public StoryNode(long id, String text, List<StoryNode> nextStoryNodes) {
+    public StoryNode(int id, String character, String text, List<NodeOption> nodeOptions) {
         this.id = id;
+        this.character = character;
         this.text = text;
-        this.nextStoryNodes = nextStoryNodes;
+        this.nodeOptions = nodeOptions;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
+    }
+
+    public String getCharacter() {
+        return character;
     }
 
     public String getText() {
         return text;
     }
 
-    public List<StoryNode> getNextStoryNodes() {
-        return nextStoryNodes;
+    public List<NodeOption> getNodeOptions() {
+        return nodeOptions;
     }
+
 }
